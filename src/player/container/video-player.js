@@ -7,13 +7,14 @@ import Timer from '../components/timer'
 import Control from '../components/video-player-control'
 import ProgressBar from '../components/progress-bar';
 import Spinner from '../components/spinner';
+import Volumen from '../components/volumen';
 
 export default class VideoPlayer extends Component {
     state = {
         pause: true,
         duration: 0,
         currentTime: 0,
-        loading:false
+        loading: false
     }
     tooglePlay = (event) => {
         this.setState({
@@ -51,16 +52,19 @@ export default class VideoPlayer extends Component {
         //event.target.value
         this.video.currentTime = event.target.value;
     }
-    handleSeeking=event=>{
+    handleSeeking = event => {
         this.setState({
-            loading:true
+            loading: true
         })
     }
 
-    handleSeeked=event=>{
+    handleSeeked = event => {
         this.setState({
-            loading:false
+            loading: false
         })
+    }
+    handleVolumenChangue = event => {
+        this.video.volume = event.target.value;
     }
     render() {
         return (
@@ -82,6 +86,9 @@ export default class VideoPlayer extends Component {
                         duration={this.state.duration}
                         value={this.state.currentTime}
                         handleProgressChangue={this.handleProgressChangue}
+                    />
+                    <Volumen
+                        handleVolumenChangue={this.handleVolumenChangue}
                     />
                 </Control>
                 <Spinner
