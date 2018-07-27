@@ -29,7 +29,9 @@ class Home extends Component {
             <HandleComponent>
                 <HomeLayout >
                     <Releated />
-                    <VideoPlayer/>
+                    <VideoPlayer
+                        autoplay
+                    />
                     <Categories
                         categories={this.props.data.categories}
                         handleOpenModal={this.handleOpenModal}
