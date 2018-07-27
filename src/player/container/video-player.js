@@ -8,6 +8,7 @@ import Control from '../components/video-player-control'
 import ProgressBar from '../components/progress-bar';
 import Spinner from '../components/spinner';
 import Volumen from '../components/volumen';
+import FullScreen from '../components/full-screen';
 
 export default class VideoPlayer extends Component {
     state = {
@@ -66,12 +67,51 @@ export default class VideoPlayer extends Component {
     handleVolumenChangue = event => {
         this.video.volume = event.target.value;
     }
+
+    handleFullScreenClick = event => {
+        if (!(document.fullscreen || document.webkitIsFullScreen || document.mozFullScreen)) {
+            this.setfullScreen(this.player);
+        } else {
+            this.exitFullScreeen();
+        }
+    }
+
+    setfullScreen = element => {
+        try { element.requestFullscreen() } catch (e) {
+            try { element.webkitRequestFullscreen() } catch (e) {
+                try { element.mozRequestFullscreen() } catch (e) {
+                    try { element.msRequestFullscreen() } catch (e) {
+                        console.log(e)
+                    }
+                }
+            }
+        }
+    }
+
+    exitFullScreeen = () => {
+        try { document.exitFullscreen() } catch (e) {
+            try { document.webkitExitFullscreen() } catch (e) {
+                try { document.mozCancelFullscreen() } catch (e) {
+                    try { document.msExitFullscreen() } catch (e) {
+                        console.log(e)
+                    }
+                }
+            }
+        }
+
+    }
+
+    setRef = elelemnt => {
+        this.player = elelemnt;
+    }
     render() {
         return (
-            <VideoPlayerLayout>
+            <VideoPlayerLayout
+                setRef={this.setRef}
+            >
 
                 <Title
-                    title="Esto es un video chido!"
+                    title={this.props.title}
                 />
                 <Control>
                     <PlayPause
@@ -90,6 +130,9 @@ export default class VideoPlayer extends Component {
                     <Volumen
                         handleVolumenChangue={this.handleVolumenChangue}
                     />
+                    <FullScreen
+                        handleFullScreenClick={this.handleFullScreenClick}
+                    />
                 </Control>
                 <Spinner
                     active={this.state.loading}
@@ -102,7 +145,7 @@ export default class VideoPlayer extends Component {
                     handleTimeUpdate={this.handleTimeUpdate}
                     handleSeeking={this.handleSeeking}
                     handleSeeked={this.handleSeeked}
-                    src="http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"
+                    src={this.props.src}
                 />
             </VideoPlayerLayout>
         )

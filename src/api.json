@@ -141,6 +141,37 @@
         }
       ]
     }
+  ],
+  "listfriends": [
+    {
+      "id": 1,
+      "src": "./assets/mejorandola.jpg",
+      "nombre": "Darwin Alvarez"
+    },
+    {
+      "id": 2,
+      "src": "./assets/mejorandola.jpg",
+      "nombre": "Darwin Alvarez"
+    },
+    {
+      "id": 3,
+      "src": "./assets/mejorandola.jpg",
+      "nombre": "Darwin Alvarez"
+    },
+    {
+      "id": 4,
+      "src": "./assets/mejorandola.jpg",
+      "nombre": "Darwin Alvarez"
+    },
+    {
+      "id": 5,
+      "src": "./assets/mejorandola.jpg",
+      "nombre": "Darwin Alvarez"
+    },
+    {
+      "id": 6,
+      "src": "./assets/mejorandola.jpg",
+      "nombre": "Darwin Alvarez"
+    }
   ]
 }
-
