@@ -9,8 +9,9 @@ import ProgressBar from '../components/progress-bar';
 import Spinner from '../components/spinner';
 import Volumen from '../components/volumen';
 import FullScreen from '../components/full-screen';
+import {connect} from 'react-redux';
 
-export default class VideoPlayer extends Component {
+class VideoPlayer extends Component {
     state = {
         pause: true,
         duration: 0,
@@ -111,7 +112,7 @@ export default class VideoPlayer extends Component {
             >
 
                 <Title
-                    title={this.props.title}
+                    title={this.props.media.get('title')}
                 />
                 <Control>
                     <PlayPause
@@ -145,9 +146,17 @@ export default class VideoPlayer extends Component {
                     handleTimeUpdate={this.handleTimeUpdate}
                     handleSeeking={this.handleSeeking}
                     handleSeeked={this.handleSeeked}
-                    src={this.props.src}
+                    src={this.props.media.get('src')}
                 />
             </VideoPlayerLayout>
         )
     }
 }
+
+function mapStateToPros(state, props){
+    return{
+        media: state.get('data').get('entities').get('media').get(props.id)
+    }
+}
+
+export default connect (mapStateToPros)(VideoPlayer);
